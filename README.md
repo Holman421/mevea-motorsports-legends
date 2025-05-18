@@ -4,8 +4,6 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=flat-square&logo=greensock&logoColor=white)](https://greensock.com/gsap/)
 
-> High-performance motorsports website showcasing legendary vehicles and their history.
-
 ## 🌐 Live Demo
 
 **[mevea-motorsports-legends.vercel.app](https://mevea-motorsports-legends.vercel.app)**
@@ -13,12 +11,6 @@
 ## 📋 Project Overview
 
 This project was developed as a homework assignment for Mevea, focusing on creating an engaging and interactive motorsports showcase website.
-
-## 🛠️ Tech Stack
-
-- **[Astro](https://astro.build)** - Fast, content-focused web framework
-- **[Tailwind CSS](https://tailwindcss.com)** - Utility-first CSS framework
-- **[GSAP](https://greensock.com/gsap/)** - Professional-grade animation library
 
 ## 🚀 Getting Started
 
