@@ -1,0 +1,71 @@
+---
+import { Image } from "astro:assets";
+import Logo from "../assets/images/logo.png";
+---
+
+<nav class="flex items-center justify-between p-4">
+	<div class="flex items-center gap-16">
+		<Image
+			src={Logo}
+			alt="Logo"
+			width={Logo.width}
+			height={Logo.height}
+			class="h-20 w-auto object-contain"
+		/>
+		<div class="relative">
+			<select
+				id="legend-select"
+				class="appearance-none px-6 py-4 pr-10 text-basic-text border border-border rounded-full focus:outline-none"
+			>
+				<option value="" disabled selected>Vyberte si legendu</option>
+			</select>
+			<!-- Placeholder for custom arrow SVG -->
+			<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3">
+				<!-- Your custom SVG will go here -->
+			</div>
+		</div>
+	</div>
+	<div></div>
+</nav>
+
+<script>
+	// Get the select element
+	const legendSelect = document.getElementById("legend-select");
+
+	// Function to handle selection change
+	function handleSelectChange(event) {
+		const selectedValue = event.target.value;
+		console.log("Selected legend:", selectedValue);
+		// Here you can add functionality to handle the selection
+	}
+
+	// Add event listener to the select
+	if (legendSelect) {
+		legendSelect.addEventListener("change", handleSelectChange);
+	}
+	// Function to populate options (can be used later)
+	function populateOptions(options: Array<{ value: string; label: string }>) {
+		if (!legendSelect) return;
+
+		const selectElement = legendSelect as HTMLSelectElement;
+
+		// Clear existing options except the placeholder
+		while (selectElement.options.length > 1) {
+			selectElement.remove(1);
+		}
+
+		// Add new options
+		options.forEach((option) => {
+			const optionElement = document.createElement("option");
+			optionElement.value = option.value;
+			optionElement.textContent = option.label;
+			selectElement.appendChild(optionElement);
+		});
+	}
+
+	// Example of how to use the populateOptions function:
+	// populateOptions([
+	//   { value: 'legend1', label: 'Legend 1' },
+	//   { value: 'legend2', label: 'Legend 2' }
+	// ]);
+</script>

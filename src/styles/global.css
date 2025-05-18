@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+/* Font Definitions */
+@font-face {
+  font-family: 'Gilmer';
+  src: url('/fonts/Gilmer-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gilmer';
+  src: url('/fonts/Gilmer-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+    /* Fonts */
+    --font-orbitron: Orbitron, "sans-serif";
+    --font-gilmer: Gilmer, "sans-serif";
+    --font-inter: Inter, "sans-serif";
+    --text-3xl-big: 2.5rem;
+
+    /* Colors */
+    --color-border: #303030; 
+    --color-gray-dark: #1A1A1A;
+    --color-basic-text: ##9E9E9E;
+
+
+}
+
+.orbitron {
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+.gilmer {
+    font-family: "Gilmer", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.gilmer-medium {
+    font-family: "Gilmer", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.inter {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.inter-medium {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.inter-semibold {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+body {
+    @apply bg-black text-white font-sans;
+    overflow-x: hidden; 
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+}
+
+.animate-clip-path {
+    @apply transition-[clip-path] duration-300 ease-in-out;
+}
