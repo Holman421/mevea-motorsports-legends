@@ -13,9 +13,9 @@ const silverValue = 517.83;
 ---
 
 <nav
-	class="flex items-center w-full fixed top-0 left-0 right-0 z-50 bg-gradient-to-t from-transparent from-0% to-gray-800 to-100%"
+	class="flex items-center w-full fixed -translate-y-[100%] top-0 left-0 right-0 z-50 bg-gradient-to-t from-transparent from-0% to-gray-800 to-100%"
 >
-	<div class="container-big justify-between p-8 w-full flex">
+	<div class="container-big justify-between p-8 !pr-26 w-full flex">
 		<div class="flex items-center gap-16">
 			<a class="cursor-pointer" href="/">
 				<Image
@@ -25,6 +25,7 @@ const silverValue = 517.83;
 					height={Logo.height}
 					class="h-20 w-auto object-contain"
 				/>
+				<span class="sr-only">Vrátit se na hlavní stránku</span>
 			</a>
 			<div
 				class="group relative pl-6 pr-24 py-4 border border-gray-700 hover:border-gray-500 rounded-full cursor-pointer transition-colors duration-300"
@@ -38,14 +39,14 @@ const silverValue = 517.83;
 		<div class="flex items-center gap-8">
 			<div class="flex flex-col">
 				<div class="flex items-center gap-2 relative">
-					<GoldIcon class="h-4 w-4 absolute -left-6 top-2" />
+					<GoldIcon class="h-4 w-4 absolute -left-6 top-1" />
 					<p class="text-gold small">1 Unce zlato:</p>
 				</div>
 				<p class="text-[14px]">{stylePrize(goldValue)}</p>
 			</div>
 			<div class="flex flex-col pl-10">
 				<div class="flex items-center gap-2 relative">
-					<SilverIcon class="h-4 w-4 absolute -left-6 top-0" />
+					<SilverIcon class="h-4 w-4 absolute -left-6 -top-1" />
 					<p class="text-silver small">1 Unce stříbro:</p>
 				</div>
 				<p class="text-[14px]">{stylePrize(silverValue)}</p>
@@ -55,17 +56,20 @@ const silverValue = 517.83;
 				<PrizeIcon class="h-4 w-4" />
 				<p class="text-gold whitespace-nowrap small">Vývoj cen</p>
 			</a>
-			<div class="w-9 flex items-end flex-col gap-2 ml-10 cursor-pointer group">
-				<div class="h-0.5 w-[100%] bg-white rounded-full"></div>
-				<div
-					class="h-0.5 w-[75%] bg-white rounded-full transition-all duration-300 group-hover:w-[100%]"
-				>
-				</div>
-				<div
-					class="h-0.5 w-[50%] bg-white rounded-full transition-all duration-300 group-hover:w-[100%]"
-				>
-				</div>
-			</div>
+		</div>
+	</div>
+
+	<div
+		class="w-9 flex items-end flex-col gap-2 ml-10 cursor-pointer group fixed top-[55px] right-10"
+	>
+		<div class="h-0.5 w-[100%] bg-white rounded-full"></div>
+		<div
+			class="h-0.5 w-[75%] bg-white rounded-full transition-all duration-300 group-hover:w-[100%]"
+		>
+		</div>
+		<div
+			class="h-0.5 w-[50%] bg-white rounded-full transition-all duration-300 group-hover:w-[100%]"
+		>
 		</div>
 	</div>
 </nav>

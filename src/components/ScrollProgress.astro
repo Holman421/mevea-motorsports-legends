@@ -77,7 +77,6 @@
 	.indicator-bullet {
 		transition: all 0.3s ease-in-out;
 	}
-
 	.section-indicator.active .indicator-bullet,
 	.indicator-bullet.scale-110 {
 		background-color: var(--color-gold);
@@ -106,9 +105,7 @@
 	import { gsap } from "gsap";
 	import { ScrollTrigger } from "gsap/ScrollTrigger";
 	import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-
 	gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-
 	document.addEventListener("DOMContentLoaded", () => {
 		const elements = {
 			progressBar: document.querySelector(
@@ -118,12 +115,18 @@
 			bottomIndicator: document.getElementById("bottom-indicator")
 		};
 
+		const sectionIds = ["section-1", "section-2", "section-3"];
+		const sections = sectionIds.map((id) => document.getElementById(id));
+
 		const SCROLL_THRESHOLDS = {
 			first: 0,
 			second: 0.33,
 			third: 0.66,
 			bottom: 0.99
 		};
+
+		// Make the first bulletpoint active by default
+		activateSection(0);
 
 		ScrollTrigger.create({
 			trigger: document.body,
@@ -160,20 +163,40 @@
 			bullet.style.borderColor = isAtBottom ? "var(--color-gold)" : "var(--color-gray-700)";
 			bullet.classList.toggle("scale-110", isAtBottom);
 		}
-
 		function activateSection(index: number): void {
 			elements.sectionIndicators.forEach((indicator, i: number) => {
 				const isCurrent = i === index;
-				const isPast = i < index;
+				const isPassed = i <= index; // This includes current and all previous sections
 
-				indicator.classList.toggle("active", isCurrent || isPast);
-				indicator.classList.toggle("text-visible", isCurrent);
+				// Reset all indicators first
+				indicator.classList.remove("active");
+				indicator.classList.remove("text-visible");
+
+				// Set active on the current and passed indicators
+				if (isPassed) {
+					indicator.classList.add("active");
+				}
+
+				// Only set text visible on the current indicator
+				if (isCurrent) {
+					indicator.classList.add("text-visible");
+				}
+
+				// Get the bullet element for this indicator
+				const bullet = indicator.querySelector(".indicator-bullet") as HTMLElement;
+				if (bullet) {
+					// Set gold color for current and passed sections
+					if (isPassed) {
+						bullet.style.backgroundColor = "var(--color-gold)";
+						bullet.style.borderColor = "var(--color-gold)";
+					} else {
+						// Reset to inactive state for indicators that have not been passed yet
+						bullet.style.backgroundColor = "";
+						bullet.style.borderColor = "var(--color-gray-700)";
+					}
+				}
 			});
 		}
-
-		const sectionIds = ["section-1", "section-2", "section-3"];
-		const sections = sectionIds.map((id) => document.getElementById(id));
-
 		elements.sectionIndicators.forEach((indicator, index: number) => {
 			indicator.addEventListener("click", () => {
 				const section = sections[index];

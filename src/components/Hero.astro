@@ -10,7 +10,7 @@ import FormuleBg from "../assets/images/formule-bg-1.png";
 import CartIcon from "../assets/svg/cart.svg";
 ---
 
-<div class="h-screen mb-[100px] flex items-end justify-center relative">
+<div class="h-screen mb-[400px] flex items-end justify-center relative">
 	<Image
 		src={GrahamHead}
 		alt="Graham Head"
@@ -29,26 +29,28 @@ import CartIcon from "../assets/svg/cart.svg";
 		class="absolute top-[37.5%] -left-[20%] w-[100%] object-cover -z-[1] formula-bg"
 		id="formulaBg"
 	/>
-	<div class="container-big flex justify-between mb-10">
+	<div class="container-big px-10 flex justify-between mb-10">
 		<div class="flex flex-col gap-24">
-			<h1 class="text-[68px] max-w-[750px] font-medium leading-[125%] split-text">
+			<h1
+				class="text-[clamp(2.5rem,calc(-1rem+4.375vw),4.25rem)] max-w-[750px] font-medium leading-[125%] split-text"
+			>
 				Unikátní investiční mince s motivy mistrů světa <span class="text-gold">Formule 1.</span>
 			</h1>
 			<div class="flex gap-[38px]">
-				<Button text="Zjistit více" url="/" />
+				<Button text="Zjistit více" url="/" alt="Zjistit více o investičních mincích" />
 				<a class="flex items-center gap-3 cursor-pointer" href="/">
 					<CartIcon class="h-4 w-4" />
 					<p class="text-gold whitespace-nowrap">Koupit v e-shopu</p>
 				</a>
 			</div>
 		</div>
-		<div class="relative">
+		<div class="relative size-[clamp(21.875rem,calc(0.625rem+26.563vw),32.5rem)]">
 			<Image
 				src={GoldCoin}
 				alt="Gold Coin"
 				width={GoldCoin.width}
 				height={GoldCoin.height}
-				class="size-[520px] object-cover"
+				class="size-full object-cover"
 				id="goldCoin"
 			/>
 			<Image
@@ -56,7 +58,7 @@ import CartIcon from "../assets/svg/cart.svg";
 				alt="Silver Coin"
 				width={silverCoin.width}
 				height={silverCoin.height}
-				class="absolute size-[265px] object-cover z-[2] -left-[30%] bottom-0"
+				class="absolute size-[50%] object-cover z-[2] -left-[30%] bottom-0"
 				id="silverCoin"
 			/>
 		</div>
@@ -69,31 +71,53 @@ import CartIcon from "../assets/svg/cart.svg";
 		const goldCoin = document.getElementById("goldCoin");
 
 		if (silverCoin && goldCoin) {
-			// Maximum movement in pixels - different for each coin
-			const maxMovementSilver = 30; // More movement for the smaller silver coin
-			const maxMovementGold = 10; // Less movement for the larger gold coin
+			const maxMovementSilver = 30;
+			const maxMovementGold = 10;
+
+			silverCoin.style.transition = "transform 0.3s ease-out";
+			goldCoin.style.transition = "transform 0.4s ease-out";
+
+			let targetSilverX = 0;
+			let targetSilverY = 0;
+			let targetGoldX = 0;
+			let targetGoldY = 0;
+
+			let currentSilverX = 0;
+			let currentSilverY = 0;
+			let currentGoldX = 0;
+			let currentGoldY = 0;
+
+			let lastMouseMoveTime = 0;
+			const throttleInterval = 16;
 
 			document.addEventListener("mousemove", (e) => {
-				// Calculate mouse position as percentage of window
+				const now = Date.now();
+				if (now - lastMouseMoveTime < throttleInterval) return;
+				lastMouseMoveTime = now;
+
 				const mouseX = e.clientX / window.innerWidth;
 				const mouseY = e.clientY / window.innerHeight;
 
-				// Calculate offset for silver coin (more movement)
-				const offsetSilverX = (mouseX - 0.5) * maxMovementSilver;
-				const offsetSilverY = (mouseY - 0.5) * maxMovementSilver;
-
-				// Calculate offset for gold coin (less movement)
-				const offsetGoldX = (mouseX - 0.5) * maxMovementGold;
-				const offsetGoldY = (mouseY - 0.5) * maxMovementGold;
-
-				// Apply smooth transform to the silver coin
-				silverCoin.style.transform = `translate(${offsetSilverX}px, ${offsetSilverY}px)`;
-				silverCoin.style.transition = "transform 0.3s ease-out";
-
-				// Apply smooth transform to the gold coin
-				goldCoin.style.transform = `translate(${offsetGoldX}px, ${offsetGoldY}px)`;
-				goldCoin.style.transition = "transform 0.4s ease-out";
+				targetSilverX = (mouseX - 0.5) * maxMovementSilver;
+				targetSilverY = (mouseY - 0.5) * maxMovementSilver;
+				targetGoldX = (mouseX - 0.5) * maxMovementGold;
+				targetGoldY = (mouseY - 0.5) * maxMovementGold;
 			});
+
+			function animateCoins() {
+				const easing = 0.5;
+
+				currentSilverX += (targetSilverX - currentSilverX) * easing;
+				currentSilverY += (targetSilverY - currentSilverY) * easing;
+				currentGoldX += (targetGoldX - currentGoldX) * easing;
+				currentGoldY += (targetGoldY - currentGoldY) * easing;
+
+				silverCoin!.style.transform = `translate(${currentSilverX}px, ${currentSilverY}px)`;
+				goldCoin!.style.transform = `translate(${currentGoldX}px, ${currentGoldY}px)`;
+
+				requestAnimationFrame(animateCoins);
+			}
+			animateCoins();
 		}
 	});
 </script>

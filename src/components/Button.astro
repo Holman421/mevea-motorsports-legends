@@ -2,9 +2,10 @@
 interface Props {
 	url: string;
 	text: string;
+	alt: string;
 }
 
-const { url, text } = Astro.props;
+const { url, text, alt } = Astro.props;
 ---
 
 <a
@@ -12,4 +13,5 @@ const { url, text } = Astro.props;
 	class="px-11 py-3.5 rounded-full text-[16px] font-inter text-black hover:text-white font-medium bg-gradient-to-tr from-gold to-gold-dark border border-transparent hover:bg-black hover:border-white hover:from-transparent hover:to-transparent transition-colors transition-border duration-300 ease-in-out"
 >
 	{text}
+	<span class="sr-only"> {alt}</span>
 </a>
