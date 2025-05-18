@@ -9,24 +9,44 @@ export const initSplitTextAnimations = (): void => {
 
         splitTextElements.forEach((element) => {
             const text = element.textContent || "";
-
             element.textContent = "";
 
-            const chars = text.split("").map((char) => {
-                const span = document.createElement("span");
-                span.textContent = char === " " ? "\u00A0" : char;
-                span.style.display = "inline-block";
-                span.style.opacity = "0";
-                span.style.transform = "translateY(20px)";
-                return span;
+            // First, split by words to maintain word integrity
+            const words = text.split(" ");
+            const wordSpans = words.map(word => {
+                const wordSpan = document.createElement("span");
+                wordSpan.style.display = "inline-block";
+                wordSpan.style.whiteSpace = "nowrap";
+                wordSpan.style.marginRight = "0.25em"; // Add space between words
+
+                // Then split each word into characters
+                const chars = word.split("").map((char) => {
+                    const span = document.createElement("span");
+                    span.textContent = char;
+                    span.style.display = "inline-block";
+                    span.style.opacity = "0";
+                    span.style.transform = "translateY(20px)";
+                    return span;
+                });
+
+                // Add characters to the word span
+                chars.forEach(char => {
+                    wordSpan.appendChild(char);
+                });
+
+                return { wordSpan, chars };
             });
 
-            chars.forEach((char) => {
-                element.appendChild(char);
+            // Add words to the element
+            wordSpans.forEach(({ wordSpan }) => {
+                element.appendChild(wordSpan);
             });
+
+            // Collect all character spans for animation
+            const allChars = wordSpans.flatMap(({ chars }) => chars);
 
             // Create the animation
-            gsap.to(chars, {
+            gsap.to(allChars, {
                 opacity: 1,
                 y: 0,
                 duration: 0.5,
@@ -113,8 +133,32 @@ export const initCardAnimations = (): void => {
     });
 };
 
+export const initFormulaAnimation = (): void => {
+    document.addEventListener("DOMContentLoaded", () => {
+        const formulaBg = document.querySelector("#formulaBg");
+
+        if (formulaBg) {
+            gsap.fromTo(
+                formulaBg,
+                {
+                    x: "-100%",
+                    opacity: 0
+                },
+                {
+                    x: "0%",
+                    opacity: 1,
+                    duration: 1.5,
+                    ease: "power2.out",
+                    delay: 0.3
+                }
+            );
+        }
+    });
+};
+
 export const initAllAnimations = (): void => {
     initSplitTextAnimations();
     initBackgroundAnimation();
     initCardAnimations();
+    initFormulaAnimation();
 };

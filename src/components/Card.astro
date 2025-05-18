@@ -1,4 +1,6 @@
 ---
+import Button from "./Button.astro";
+
 interface Props {
 	image: ImageMetadata;
 	name: string;
@@ -19,10 +21,7 @@ const { image, name, title, years, url } = Astro.props;
 	<h3 class="text-[32px] font-medium mt-6">{name}</h3>
 	<p class="text-sm text-gold mt-3.5">{title}</p>
 	<p class="text-sm text-white-text mt-3.5">{years}</p>
-	<a
-		href={url}
-		class="px-11 py-3.5 mt-12 rounded-full text-black hover:text-white font-medium bg-gradient-to-tr from-gold to-gold-dark border border-transparent hover:bg-black hover:border-white hover:from-transparent hover:to-transparent transition-colors transition-border duration-300 ease-in-out"
-	>
-		<p>Investiční mince</p>
-	</a>
+	<div class="mt-12">
+		<Button url={url} text="Investiční mince" />
+	</div>
 </div>
