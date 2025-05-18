@@ -13,49 +13,59 @@ const silverValue = 517.83;
 ---
 
 <nav
-	class="flex items-center justify-between pt-8 container-big fixed top-0 left-0 right-0 z-50 px-8"
+	class="flex items-center w-full fixed top-0 left-0 right-0 z-50 bg-gradient-to-t from-transparent from-0% to-gray-800 to-100%"
 >
-	<div class="flex items-center gap-16">
-		<Image
-			src={Logo}
-			alt="Logo"
-			width={Logo.width}
-			height={Logo.height}
-			class="h-20 w-auto object-contain"
-		/>
-		<div
-			class="group relative pl-6 pr-24 py-4 border border-gray-700 hover:border-gray-500 rounded-full cursor-pointer transition-colors duration-300"
-		>
-			<p class="text-gray-600">Vyberte si legendu</p>
-			<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-5">
-				<ArrowIcon class="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
+	<div class="container-big justify-between p-8 w-full flex">
+		<div class="flex items-center gap-16">
+			<a class="cursor-pointer" href="/">
+				<Image
+					src={Logo}
+					alt="Logo"
+					width={Logo.width}
+					height={Logo.height}
+					class="h-20 w-auto object-contain"
+				/>
+			</a>
+			<div
+				class="group relative pl-6 pr-24 py-4 border border-gray-700 hover:border-gray-500 rounded-full cursor-pointer transition-colors duration-300"
+			>
+				<p class="text-gray-600">Vyberte si legendu</p>
+				<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-5">
+					<ArrowIcon class="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="flex items-center gap-8">
-		<div class="flex flex-col">
-			<div class="flex items-center gap-2 relative">
-				<GoldIcon class="h-4 w-4 absolute -left-6 top-2" />
-				<p class="text-gold">1 Unce zlato:</p>
+		<div class="flex items-center gap-8">
+			<div class="flex flex-col">
+				<div class="flex items-center gap-2 relative">
+					<GoldIcon class="h-4 w-4 absolute -left-6 top-2" />
+					<p class="text-gold">1 Unce zlato:</p>
+				</div>
+				<p>{stylePrize(goldValue)}</p>
 			</div>
-			<p>{stylePrize(goldValue)}</p>
-		</div>
-		<div class="flex flex-col pl-10">
-			<div class="flex items-center gap-2 relative">
-				<SilverIcon class="h-4 w-4 absolute -left-6 top-0" />
-				<p>1 Unce stříbro:</p>
+			<div class="flex flex-col pl-10">
+				<div class="flex items-center gap-2 relative">
+					<SilverIcon class="h-4 w-4 absolute -left-6 top-0" />
+					<p>1 Unce stříbro:</p>
+				</div>
+				<p>{stylePrize(silverValue)}</p>
 			</div>
-			<p>{stylePrize(silverValue)}</p>
-		</div>
-		<div class="h-9 w-px bg-gray-700"></div>
-		<div class="flex items-center gap-3">
-			<PrizeIcon class="h-4 w-4" />
-			<p class="text-gold whitespace-nowrap">Vývoj cen</p>
-		</div>
-		<div class="size-9 flex items-end flex-col gap-2 ml-10">
-			<div class="h-0.5 w-[100%] bg-white rounded-full"></div>
-			<div class="h-0.5 w-[75%] bg-white rounded-full"></div>
-			<div class="h-0.5 w-[50%] bg-white rounded-full"></div>
+			<div class="h-9 w-px bg-gray-700"></div>
+			<a class="flex items-center gap-3 cursor-pointer" href="/">
+				<PrizeIcon class="h-4 w-4" />
+				<p class="text-gold whitespace-nowrap">Vývoj cen</p>
+			</a>
+			<div class="w-9 flex items-end flex-col gap-2 ml-10 cursor-pointer group">
+				<div class="h-0.5 w-[100%] bg-white rounded-full"></div>
+				<div
+					class="h-0.5 w-[75%] bg-white rounded-full transition-all duration-300 group-hover:w-[100%]"
+				>
+				</div>
+				<div
+					class="h-0.5 w-[50%] bg-white rounded-full transition-all duration-300 group-hover:w-[100%]"
+				>
+				</div>
+			</div>
 		</div>
 	</div>
 </nav>

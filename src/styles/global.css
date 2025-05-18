@@ -67,6 +67,14 @@
     font-style: normal;
   }
 
+  p {
+    @apply font-inter text-[16px] 
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-gilmer;
+  }
+
 .gilmer {
     font-family: "Gilmer", sans-serif;
     font-optical-sizing: auto;

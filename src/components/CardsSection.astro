@@ -8,47 +8,18 @@ import { Image } from "astro:assets";
 ---
 
 <script>
-	import { gsap } from "gsap";
-	import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-	// Register the ScrollTrigger plugin with GSAP
-	gsap.registerPlugin(ScrollTrigger);
-
-	document.addEventListener("DOMContentLoaded", () => {
-		const formuleBg = document.getElementById("formuleBg");
-		const cardsSection = document.getElementById("cardsSection");
-
-		if (formuleBg && cardsSection) {
-			gsap.fromTo(
-				formuleBg,
-				{
-					x: "-50%",
-					y: "-25%"
-				},
-				{
-					x: "50%",
-					y: "125%",
-					ease: "power1.inOut",
-					scrollTrigger: {
-						trigger: cardsSection,
-						start: "top bottom",
-						end: "bottom center",
-						scrub: true,
-						markers: true
-					}
-				}
-			);
-		}
-	});
+	import { initAllAnimations } from "../styles/animations";
+	// Initialize all animations
+	initAllAnimations();
 </script>
 
 <section
 	id="cardsSection"
-	class="container-big flex flex-col relative gap-32 items-center justify-center py-32"
+	class="container-big flex flex-col relative gap-32 items-center justify-center py-32 scroll-section"
 >
 	<div class="flex flex-col gap-6 items-center">
-		<h4 class="text-white-text text-2xl">V současné době startujeme první etapu</h4>
-		<h2 class="text-gold text-6xl">prvních 12 mistrů světa F1</h2>
+		<h4 class="text-white-text text-2xl split-text">V současné době startujeme první etapu</h4>
+		<h2 class="text-gold text-6xl split-text">prvních 12 mistrů světa F1</h2>
 	</div>
 	<div class="grid grid-cols-1 md:grid-cols-3 gap-1.5 w-full">
 		<Card
@@ -73,6 +44,6 @@ import { Image } from "astro:assets";
 		height={FormuleBg.height}
 		width={FormuleBg.width}
 		alt="Formule background"
-		class="absolute top-0 -z-10"
+		class="absolute top-0 -z-10 scroll-bg"
 	/>
 </section>
