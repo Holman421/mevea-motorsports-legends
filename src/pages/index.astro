@@ -5,11 +5,17 @@ import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import CardsSection from "../components/CardsSection.astro";
 import Hero from "../components/Hero.astro";
+import ScrollProgress from "../components/ScrollProgress.astro";
 ---
 
 <Layout>
 	<Navbar />
-	<Hero />
-	<CardsSection />
-	<div class="h-screen"></div>
+	<ScrollProgress />
+	<div id="section-1">
+		<Hero />
+	</div>
+	<div id="section-2">
+		<CardsSection />
+	</div>
+	<div id="section-3" class="h-screen">Another section</div>
 </Layout>
