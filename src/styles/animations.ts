@@ -1,37 +1,26 @@
-
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
-/**
- * Initializes a split text animation for elements with the 'split-text' class
- * The animation reveals text character by character when scrolled into view
- */
 export const initSplitTextAnimations = (): void => {
     document.addEventListener("DOMContentLoaded", () => {
-        // Get all elements with the split-text class
         const splitTextElements = document.querySelectorAll(".split-text");
 
         splitTextElements.forEach((element) => {
-            // Get the text content and split it into characters
             const text = element.textContent || "";
 
-            // Clear the current content
             element.textContent = "";
 
-            // Create spans for each character and append them to the element
             const chars = text.split("").map((char) => {
                 const span = document.createElement("span");
-                span.textContent = char === " " ? "\u00A0" : char; // Use non-breaking space for actual spaces
+                span.textContent = char === " " ? "\u00A0" : char;
                 span.style.display = "inline-block";
                 span.style.opacity = "0";
                 span.style.transform = "translateY(20px)";
                 return span;
             });
 
-            // Append all characters to the element
             chars.forEach((char) => {
                 element.appendChild(char);
             });
@@ -53,10 +42,6 @@ export const initSplitTextAnimations = (): void => {
     });
 };
 
-/**
- * Animates a background element based on scroll position
- * Used for elements with the 'scroll-bg' class
- */
 export const initBackgroundAnimation = (): void => {
     document.addEventListener("DOMContentLoaded", () => {
         const bgElements = document.querySelectorAll(".scroll-bg");
@@ -89,8 +74,47 @@ export const initBackgroundAnimation = (): void => {
     });
 };
 
-// Export a function that initializes all animations
+export const initCardAnimations = (): void => {
+    document.addEventListener("DOMContentLoaded", () => {
+        // Get all card elements in the cards section
+        const cardSection = document.querySelector("#cardsSection");
+        const cards = document.querySelectorAll("#cardsSection > div.grid > div");
+        const transitionAmount = "15%";
+
+        if (cards.length === 3) {
+            gsap.fromTo(cards[0],
+                { y: `-${transitionAmount}` },
+                {
+                    y: `${transitionAmount}`,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: cardSection,
+                        start: "top center",
+                        end: "bottom center",
+                        scrub: true,
+                    }
+                }
+            );
+
+            gsap.fromTo(cards[2],
+                { y: `${transitionAmount}` },
+                {
+                    y: `-${transitionAmount}`,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: cardSection,
+                        start: "top center",
+                        end: "bottom center",
+                        scrub: true,
+                    }
+                }
+            );
+        }
+    });
+};
+
 export const initAllAnimations = (): void => {
     initSplitTextAnimations();
     initBackgroundAnimation();
+    initCardAnimations();
 };
