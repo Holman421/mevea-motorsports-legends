@@ -49,11 +49,15 @@
     --text-3xl-big: 2.5rem;
 
     /* Colors */
-    --color-border: #303030; 
     --color-gray-dark: #1A1A1A;
-    --color-basic-text: ##9E9E9E;
 
+    --color-gray-800: #0a0a0a;
+    --color-gray-700: #303030;
+    --color-gray-600: #9E9E9E;
 
+    --color-gold: #EAC666;
+    --color-gold-dark: #B87C1D;
+    --color-white-text: #F7F7F7;
 }
 
 .orbitron {
@@ -99,7 +103,7 @@
 }
 
 body {
-    @apply bg-black text-white font-sans;
+    @apply bg-gray-800 text-white font-sans;
     overflow-x: hidden; 
 }
 
@@ -110,4 +114,8 @@ html {
 
 .animate-clip-path {
     @apply transition-[clip-path] duration-300 ease-in-out;
+}
+
+.container-big {
+    @apply max-w-[1540px] mx-auto px-4 w-full;
 }

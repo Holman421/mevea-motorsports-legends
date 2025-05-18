@@ -1,9 +1,20 @@
 ---
 import { Image } from "astro:assets";
+import { stylePrize } from "../utils/utils.ts";
+
 import Logo from "../assets/images/logo.png";
+import ArrowIcon from "../assets/svg/arrow.svg";
+import PrizeIcon from "../assets/svg/prize.svg";
+import GoldIcon from "../assets/svg/gold-triangle.svg";
+import SilverIcon from "../assets/svg/silver-triangle.svg";
+
+const goldValue = 45572.75;
+const silverValue = 517.83;
 ---
 
-<nav class="flex items-center justify-between p-4">
+<nav
+	class="flex items-center justify-between pt-8 container-big fixed top-0 left-0 right-0 z-50 px-8"
+>
 	<div class="flex items-center gap-16">
 		<Image
 			src={Logo}
@@ -12,60 +23,39 @@ import Logo from "../assets/images/logo.png";
 			height={Logo.height}
 			class="h-20 w-auto object-contain"
 		/>
-		<div class="relative">
-			<select
-				id="legend-select"
-				class="appearance-none px-6 py-4 pr-10 text-basic-text border border-border rounded-full focus:outline-none"
-			>
-				<option value="" disabled selected>Vyberte si legendu</option>
-			</select>
-			<!-- Placeholder for custom arrow SVG -->
-			<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3">
-				<!-- Your custom SVG will go here -->
+		<div
+			class="group relative pl-6 pr-24 py-4 border border-gray-700 hover:border-gray-500 rounded-full cursor-pointer transition-colors duration-300"
+		>
+			<p class="text-gray-600">Vyberte si legendu</p>
+			<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-5">
+				<ArrowIcon class="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
 			</div>
 		</div>
 	</div>
-	<div></div>
+	<div class="flex items-center gap-8">
+		<div class="flex flex-col">
+			<div class="flex items-center gap-2 relative">
+				<GoldIcon class="h-4 w-4 absolute -left-6 top-2" />
+				<p class="text-gold">1 Unce zlato:</p>
+			</div>
+			<p>{stylePrize(goldValue)}</p>
+		</div>
+		<div class="flex flex-col pl-10">
+			<div class="flex items-center gap-2 relative">
+				<SilverIcon class="h-4 w-4 absolute -left-6 top-0" />
+				<p>1 Unce stříbro:</p>
+			</div>
+			<p>{stylePrize(silverValue)}</p>
+		</div>
+		<div class="h-9 w-px bg-gray-700"></div>
+		<div class="flex items-center gap-3">
+			<PrizeIcon class="h-4 w-4" />
+			<p class="text-gold whitespace-nowrap">Vývoj cen</p>
+		</div>
+		<div class="size-9 flex items-end flex-col gap-2 ml-10">
+			<div class="h-0.5 w-[100%] bg-white rounded-full"></div>
+			<div class="h-0.5 w-[75%] bg-white rounded-full"></div>
+			<div class="h-0.5 w-[50%] bg-white rounded-full"></div>
+		</div>
+	</div>
 </nav>
-
-<script>
-	// Get the select element
-	const legendSelect = document.getElementById("legend-select");
-
-	// Function to handle selection change
-	function handleSelectChange(event) {
-		const selectedValue = event.target.value;
-		console.log("Selected legend:", selectedValue);
-		// Here you can add functionality to handle the selection
-	}
-
-	// Add event listener to the select
-	if (legendSelect) {
-		legendSelect.addEventListener("change", handleSelectChange);
-	}
-	// Function to populate options (can be used later)
-	function populateOptions(options: Array<{ value: string; label: string }>) {
-		if (!legendSelect) return;
-
-		const selectElement = legendSelect as HTMLSelectElement;
-
-		// Clear existing options except the placeholder
-		while (selectElement.options.length > 1) {
-			selectElement.remove(1);
-		}
-
-		// Add new options
-		options.forEach((option) => {
-			const optionElement = document.createElement("option");
-			optionElement.value = option.value;
-			optionElement.textContent = option.label;
-			selectElement.appendChild(optionElement);
-		});
-	}
-
-	// Example of how to use the populateOptions function:
-	// populateOptions([
-	//   { value: 'legend1', label: 'Legend 1' },
-	//   { value: 'legend2', label: 'Legend 2' }
-	// ]);
-</script>

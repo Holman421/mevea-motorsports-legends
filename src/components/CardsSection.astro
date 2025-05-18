@@ -1,0 +1,78 @@
+---
+import Card from "./Card.astro";
+import NigelCoin from "../assets/images/nigel.png";
+import AlanCoin from "../assets/images/alan.png";
+import HillCoin from "../assets/images/hill.png";
+import FormuleBg from "../assets/images/formule-bg-2.png";
+import { Image } from "astro:assets";
+---
+
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+	// Register the ScrollTrigger plugin with GSAP
+	gsap.registerPlugin(ScrollTrigger);
+
+	document.addEventListener("DOMContentLoaded", () => {
+		const formuleBg = document.getElementById("formuleBg");
+		const cardsSection = document.getElementById("cardsSection");
+
+		if (formuleBg && cardsSection) {
+			gsap.fromTo(
+				formuleBg,
+				{
+					x: "-50%",
+					y: "-25%"
+				},
+				{
+					x: "50%",
+					y: "125%",
+					ease: "power1.inOut",
+					scrollTrigger: {
+						trigger: cardsSection,
+						start: "top bottom",
+						end: "bottom center",
+						scrub: true,
+						markers: true
+					}
+				}
+			);
+		}
+	});
+</script>
+
+<section
+	id="cardsSection"
+	class="container-big flex flex-col relative gap-32 items-center justify-center py-32"
+>
+	<div class="flex flex-col gap-6 items-center">
+		<h4 class="text-white-text text-2xl">V současné době startujeme první etapu</h4>
+		<h2 class="text-gold text-6xl">prvních 12 mistrů světa F1</h2>
+	</div>
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-1.5 w-full">
+		<Card
+			image={HillCoin}
+			name="Graham Hill"
+			title="Formula One World Champion"
+			years="1962, 1968"
+			url=""
+		/>
+		<Card image={AlanCoin} name="Alan Jones" title="F1 Winner" years="1980" url="" />
+		<Card
+			image={NigelCoin}
+			name="Nigel Mansell"
+			title="Formula One World Champion"
+			years="1992"
+			url=""
+		/>
+	</div>
+	<Image
+		id="formuleBg"
+		src={FormuleBg}
+		height={FormuleBg.height}
+		width={FormuleBg.width}
+		alt="Formule background"
+		class="absolute top-0 -z-10"
+	/>
+</section>
